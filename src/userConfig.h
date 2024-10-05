@@ -30,9 +30,9 @@ enum MACHINE
 #define MACHINEID 0 // see above list of supported machines
 
 // Display
-#define OLED_DISPLAY 2       // 0 = deactivated, 1 = SH1106 (e.g. 1.3 "128x64), 2 = SSD1306 (e.g. 0.96" 128x64), 3 = SH1106_126x64_SPI
+#define OLED_DISPLAY 0       // 0 = deactivated, 1 = SH1106 (e.g. 1.3 "128x64), 2 = SSD1306 (e.g. 0.96" 128x64), 3 = SH1106_126x64_SPI
 #define OLED_I2C 0x3C         // I2C address for OLED, 0x3C by default
-#define DISPLAYTEMPLATE 1     // 1 = Standard display template, 2 = Minimal template, 3 = only temperature, 4 = scale template, 20 = vertical display (see git Handbook for further information), 5 = Modern, Added by me (Clemens)
+#define DISPLAYTEMPLATE 5     // 1 = Standard display template, 2 = Minimal template, 3 = only temperature, 4 = scale template, 20 = vertical display (see git Handbook for further information), 5 = Modern, Added by me (Clemens)
 #define DISPLAYROTATE U8G2_R0 // rotate display clockwise: U8G2_R0 = no rotation; U8G2_R1 = 90°; U8G2_R2 = 180°; U8G2_R3 = 270°
 #define SHOTTIMER 1           // 0 = deactivated, 1 = activated 2 = with scale
 #define HEATINGLOGO 0         // 0 = deactivated, 1 = Rancilio, 2 = Gaggia
@@ -121,7 +121,7 @@ enum MACHINE
 #define TEMPSENSOR 2 // Temp sensor type: 1 = DS18B20, 2 = TSIC306
 
 // Pin Layout
-#define PINTEMPSENSOR 2
+#define PINTEMPSENSOR 4 // changed from 2 to 3, because 2 is now the screen
 #define PINPRESSURESENSOR 99 // Pressure sensor 0: A0 (ESP8266), >0 ONLY ESP32
 #define PINPOWERSWITCH 99    // Input pin for powerswitch (use a pin which is LOW on startup or use an pull down resistor)
 #define PINVALVE 12
@@ -129,15 +129,19 @@ enum MACHINE
 #define PINHEATER 16
 #define PINVOLTAGESENSOR 15 // Input pin for voltage sensor (optocoupler to detect brew switch)
 #define PINETRIGGER 14      // PIN for E-Trigger relay
-#define PINBREWSWITCH 0     // 0: A0 (ESP8266) ; >0 : DIGITAL PIN, ESP32 OR ESP8266: ONLY USE PIN15 AND PIN16!
+#define PINBREWSWITCH 15     // 0: A0 (ESP8266) ; >0 : DIGITAL PIN, ESP32 OR ESP8266: ONLY USE PIN15 AND PIN16!
 #define PINSTEAMSWITCH 17
 #define LEDPIN 18        // LED PIN ON near setpoint
 #define OLED_SCL 5       // Output pin for display clock pin
 #define OLED_SDA 4       // Output pin for display data pin
 #define HXDATPIN 99      // weight scale data pin
 #define HXCLKPIN 99      // weight scale clock pin
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define SCREEN_WIDTH 170 // OLED display width, in pixels
+#define SCREEN_HEIGHT 320 // OLED display height, in pixels
+// New layout lib
+#define TFT_CS 2
+#define TFT_DC 1
+#define TFT_RST 0
 
 // Check BrewSwitch
 #if (defined(ESP8266) && ((PINBREWSWITCH != 15 && PINBREWSWITCH != 0 && PINBREWSWITCH != 16)))
